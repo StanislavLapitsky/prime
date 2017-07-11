@@ -1,4 +1,3 @@
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +23,7 @@ public class SieveEratosthenes {
         primes.add(new PrimePair(3, 3));
     }
 
-    private void fillNPrimes(Integer n) {
+    private void fillNPrimes(int n) {
         while (primes.size()<n) {
             addNextPrime();
         }
@@ -32,14 +31,14 @@ public class SieveEratosthenes {
 
     private void addNextPrime() {
         int candidate = primes.get(primes.size()-1).prime + 2;
-        for (int i = 0; i < primes.size(); i++) {
+        for (int i = 1; i < primes.size(); i++) {
             PrimePair p = primes.get(i);
             while (p.lastCrossed < candidate) {
                 p.lastCrossed += p.prime;
             }
             if (p.lastCrossed == candidate) {
                 //restart
-                candidate++;
+                candidate+=2;
                 i=-1;
             }
         }
@@ -49,6 +48,6 @@ public class SieveEratosthenes {
 
     public static void main(String[] args) {
         SieveEratosthenes test = new SieveEratosthenes();
-        test.fillNPrimes(10000);
+        test.fillNPrimes(1000);
     }
 }
